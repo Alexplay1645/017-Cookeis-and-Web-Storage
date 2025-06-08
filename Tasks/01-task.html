@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 01</title>
+</head>
+
+<body>
+    <form>
+        <input type="radio" name="color" value="#ffd800" /> Orange
+        <input type="radio" name="color" value="#5ade54" /> Green
+        <input id="saveButton" type="button" value="Сохранить" />
+    </form>
+
+    <script>
+        /*
+            Задание:
+            Добавьте возможность сохранить выбранный цвет страницы в LocalStorage.
+            Добавьте восстановление выбранного цвета из cookies, если они есть, после загрузки документа.
+        */
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const savedColor = localStorage.getItem("bgColor");
+            if (savedColor) {
+                document.body.style.backgroundColor = savedColor;
+
+                const radios = document.querySelectorAll('input[name="color"]');
+                radios.forEach(r => {
+                    if (r.value === savedColor) {
+                        r.checked = true;
+                    }
+                });
+            }
+        });
+
+        document.getElementById("saveButton").addEventListener("click", () => {
+            const selected = document.querySelector('input[name="color"]:checked');
+            if (selected) {
+                const color = selected.value;
+                document.body.style.backgroundColor = color;
+                localStorage.setItem("bgColor", color);
+            }
+        });
+    
+    </script>
+</body>
+
+</html>
